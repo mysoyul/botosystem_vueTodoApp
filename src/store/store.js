@@ -10,7 +10,7 @@ Vue.use(Vuex);
 //Vue가 VueAxios와 axios라는 별도의 라이브러리를 사용하겠다
 Vue.use(VueAxios, axios);
 
-const api_url = 'http://localhost:4500/api/todos';
+const api_url = "http://localhost:4500/api/todos";
 
 //Vuex안에 포함된 Store 객체를 생성하겠다
 export const store = new Vuex.Store({
@@ -19,7 +19,22 @@ export const store = new Vuex.Store({
     todoItems: [],
   },
   //서버와 통신을 담당하는 method 선언 (async)
-  actions: {},
+  actions: {
+    loadTodoItems(context) {
+      axios
+        .get(api_url)
+        .then((res) => res.data)
+        .then((items) => context.commit("setTodoItems", items))
+        .catch((error) => console.log(error));
+    },
+    removeTodo(context, payload) {
+      axios
+        .delete(`${api_url}/${payload.id}`)
+        .then((res) => res.data)
+        .then((items) => context.commit("setTodoItems", items))
+        .catch((error) => console.log(error));
+    },
+  },
   //상태변수를 변경하는 method 선언 (sync)
   mutations: {
     setTodoItems(state, items) {
