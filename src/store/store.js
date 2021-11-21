@@ -33,6 +33,11 @@ export const store = new Vuex.Store({
       //todoItems 상태변수에 객체저장
       state.todoItems.push(obj);
     },
+    removeTodo(state, payload) {
+        const {todoItem, index} = payload;
+        localStorage.removeItem(todoItem.item);
+        state.todoItems.splice(index, 1);  
+    }
   },
   //서버와 통신을 담당하는 method 선언 (async)
   actions: {},

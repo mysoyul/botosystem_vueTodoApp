@@ -2,7 +2,7 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput></TodoInput>
-    <TodoList @removeEvent="removeTodo" @toggleEvent="toggleTodo"></TodoList>
+    <TodoList @toggleEvent="toggleTodo"></TodoList>
     <TodoFooter @clearEvent="clearTodo"></TodoFooter>
   </div>
 </template>
@@ -30,10 +30,6 @@ export default {
   //사용자정의 메서드
   methods: {
     
-    removeTodo(todoObj, index) {
-      localStorage.removeItem(todoObj.item);
-      this.todoItems.splice(index, 1);
-    },
     toggleTodo(todoObj, index) {
       //Object Destructuring Assignment
       const {item, completed} = todoObj;
@@ -45,20 +41,6 @@ export default {
     clearTodo() {
       localStorage.clear();
       this.todoItems = [];
-    }
-  },
-  /* life cycle method */
-  created() {
-    if (localStorage.length > 0) {
-      for (var i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
-          //console.log(typeof localStorage.getItem(localStorage.key(i)));
-          //console.log( JSON.parse(localStorage.getItem(localStorage.key(i))) );
-          //JSON.parse()는 json string을 object로 변환
-          const todoObj = JSON.parse(localStorage.getItem(localStorage.key(i)));
-          this.todoItems.push(todoObj);
-        }
-      }
     }
   },
 };
