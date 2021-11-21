@@ -2,7 +2,7 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput @addEvent="addTodo"></TodoInput>
-    <TodoList :todo-array="todoItems" @removeEvent="removeTodo"></TodoList>
+    <TodoList :todo-array="todoItems" @removeEvent="removeTodo" @toggleEvent="toggleTodo"></TodoList>
     <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -40,6 +40,14 @@ export default {
     removeTodo(todoObj, index) {
       localStorage.removeItem(todoObj.item);
       this.todoItems.splice(index, 1);
+    },
+    toggleTodo(todoObj, index) {
+      //Object Destructuring Assignment
+      const {item, completed} = todoObj;
+      this.todoItems[index].completed = !completed;
+      //localStorage에 updateItem 메서드가 없어서 removeItem하고 setItem 한다.
+      localStorage.removeItem(item);
+      localStorage.setItem(item, JSON.stringify(this.todoItems[index]));
     },
   },
   /* life cycle method */
