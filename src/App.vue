@@ -3,7 +3,7 @@
     <TodoHeader></TodoHeader>
     <TodoInput @addEvent="addTodo"></TodoInput>
     <TodoList :todo-array="todoItems" @removeEvent="removeTodo" @toggleEvent="toggleTodo"></TodoList>
-    <TodoFooter></TodoFooter>
+    <TodoFooter @clearEvent="clearTodo"></TodoFooter>
   </div>
 </template>
 
@@ -49,6 +49,10 @@ export default {
       localStorage.removeItem(item);
       localStorage.setItem(item, JSON.stringify(this.todoItems[index]));
     },
+    clearTodo() {
+      localStorage.clear();
+      this.todoItems = [];
+    }
   },
   /* life cycle method */
   created() {
