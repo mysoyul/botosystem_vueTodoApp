@@ -22,7 +22,7 @@ export const store = new Vuex.Store({
   actions: {
     loadTodoItems(context) {
       axios
-        .get(api_url)
+        .get(`${api_url}`)
         .then((res) => res.data)
         .then((items) => context.commit("setTodoItems", items))
         .catch((error) => console.log(error));
@@ -30,6 +30,27 @@ export const store = new Vuex.Store({
     removeTodo(context, payload) {
       axios
         .delete(`${api_url}/${payload.id}`)
+        .then((res) => res.data)
+        .then((items) => context.commit("setTodoItems", items))
+        .catch((error) => console.log(error));
+    },
+    addTodo(context, payload) {
+      axios
+        .post(`${api_url}`, payload)
+        .then((res) => res.data)
+        .then((items) => context.commit("setTodoItems", items))
+        .catch((error) => console.log(error));
+    },
+    toggleTodo(context, payload) {
+      axios
+        .patch(`${api_url}/${payload.id}`, payload)
+        .then((res) => res.data)
+        .then((items) => context.commit("setTodoItems", items))
+        .catch((error) => console.log(error));
+    },
+    clearTodo(context) {
+      axios
+        .delete(`${api_url}`)
         .then((res) => res.data)
         .then((items) => context.commit("setTodoItems", items))
         .catch((error) => console.log(error));
