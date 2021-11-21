@@ -2,7 +2,7 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput @addEvent="addTodo"></TodoInput>
-    <TodoList :todo-array="todoItems"></TodoList>
+    <TodoList :todo-array="todoItems" @removeEvent="removeTodo"></TodoList>
     <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -36,6 +36,10 @@ export default {
       localStorage.setItem(obj.item, JSON.stringify(obj));
       //todoItems 상태변수에 객체저장
       this.todoItems.push(obj);
+    },
+    removeTodo(todoObj, index) {
+      localStorage.removeItem(todoObj.item);
+      this.todoItems.splice(index, 1);
     },
   },
   /* life cycle method */

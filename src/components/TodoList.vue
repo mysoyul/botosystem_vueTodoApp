@@ -24,8 +24,7 @@ export default {
     },
     methods: {
         removeTodo(todoItem, index) {
-            localStorage.removeItem(todoItem.item);
-            this.todoItems.splice(index, 1);
+            this.$emit('removeEvent', todoItem, index);
         },
         toggleComplete(todoItem) {
             todoItem.completed = !todoItem.completed;
