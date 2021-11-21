@@ -24,7 +24,8 @@ export default {
         addTodo() {
             if (this.newTodoItem !== '') {
                 //addEvent 라는 이름을 갖는 이벤트 발생시키기
-                this.$emit('addEvent', this.newTodoItem);
+                //this.$emit('addEvent', this.newTodoItem);
+                this.$store.commit('addTodo', this.newTodoItem);
                 this.clearInput();
             //     var value = this.newTodoItem && this.newTodoItem.trim();
             //     localStorage.setItem(value,value);

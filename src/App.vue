@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput @addEvent="addTodo"></TodoInput>
-    <TodoList :todo-array="todoItems" @removeEvent="removeTodo" @toggleEvent="toggleTodo"></TodoList>
+    <TodoInput></TodoInput>
+    <TodoList @removeEvent="removeTodo" @toggleEvent="toggleTodo"></TodoList>
     <TodoFooter @clearEvent="clearTodo"></TodoFooter>
   </div>
 </template>
@@ -29,14 +29,7 @@ export default {
   },
   //사용자정의 메서드
   methods: {
-    addTodo(todoText) {
-      var obj = { completed: false, item: todoText };
-      console.log(obj);
-      //JSON.stringify는 object를 json string 으로 변환
-      localStorage.setItem(obj.item, JSON.stringify(obj));
-      //todoItems 상태변수에 객체저장
-      this.todoItems.push(obj);
-    },
+    
     removeTodo(todoObj, index) {
       localStorage.removeItem(todoObj.item);
       this.todoItems.splice(index, 1);

@@ -2,7 +2,7 @@
     <div>
         <!--ul>li*3 -->
         <ul>
-            <li v-for="(todoItem, index) in todoArray" :key="index" class="shadow">
+            <li v-for="(todoItem, index) in this.$store.state.todoItems" :key="index" class="shadow">
                 <i class="fas fa-check checkBtn" :class="{checkBtnCompleted: todoItem.completed}" 
                     @click="toggleComplete(todoItem,index)"></i>
                 <span :class="{textCompleted: todoItem.completed}">{{todoItem.item}}</span>
@@ -16,12 +16,6 @@
 
 <script>
 export default {
-    props:['todoArray'],
-    data() {
-        return {
-            todoItems: []
-        }
-    },
     methods: {
         removeTodo(todoItem, index) {
             this.$emit('removeEvent', todoItem, index);
