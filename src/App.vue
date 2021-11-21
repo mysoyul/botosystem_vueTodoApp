@@ -3,7 +3,7 @@
     <TodoHeader></TodoHeader>
     <TodoInput></TodoInput>
     <TodoList></TodoList>
-    <TodoFooter @clearEvent="clearTodo"></TodoFooter>
+    <TodoFooter></TodoFooter>
   </div>
 </template>
 
@@ -20,21 +20,7 @@ export default {
     TodoList,
     TodoFooter,
   },
-  //상태변수
-  data() {
-    return {
-      //todoItems 배열 상태변수
-      todoItems: [],
-    };
-  },
-  //사용자정의 메서드
-  methods: {
-    
-    clearTodo() {
-      localStorage.clear();
-      this.todoItems = [];
-    }
-  },
+  
 };
 </script>
 

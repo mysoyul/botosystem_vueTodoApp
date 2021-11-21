@@ -40,16 +40,24 @@ export const store = new Vuex.Store({
     },
     toggleTodo(state, payload) {
       //Object Destructuring Assignment
-      const { todoItem, index } = payload;  
+      const { todoItem, index } = payload;
       const { item, completed } = todoItem;
       state.todoItems[index].completed = !completed;
       //localStorage에 updateItem 메서드가 없어서 removeItem하고 setItem 한다.
       localStorage.removeItem(item);
       localStorage.setItem(item, JSON.stringify(state.todoItems[index]));
     },
+    clearTodo(state) {
+      localStorage.clear();
+      state.todoItems = [];
+    },
   },
   //서버와 통신을 담당하는 method 선언 (async)
   actions: {},
   //상태변수를 조회하는 method 선언
-  getters: {},
+  getters: {
+    getTodoItems(state) {
+      return state.todoItems;
+    },
+  },
 });
